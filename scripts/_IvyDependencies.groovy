@@ -15,8 +15,9 @@ addCompileDependency = { group, name, version, type = null ->
         grailsSettings.providedDependencies << file
       }
     }
-    println "File is ${file}"
     grailsSettings.compileDependencies << file
+
+    return [file]
   }
 }
 

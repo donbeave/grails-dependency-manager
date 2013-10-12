@@ -16,5 +16,6 @@ addCompileDependency = { groupId, artifactId, version ->
   org.codehaus.groovy.grails.resolve.DependencyReport report = grailsSettings.dependencyManager.resolve("compile")
 
   grailsSettings.compileDependencies = report.allArtifacts
+  return report.allArtifacts
 }
 
