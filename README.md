@@ -6,6 +6,11 @@ from the current DependencyManager and adding it to the compile (and provided) c
 
 This allows the classpath to be dynamically modified by plugins.
 
+Supports both ***Aether*** and ***Ivy***
+
+Examples
+----------
+
 For a plugin provided script that builds its own classpath
 
 **scripts/Example.groovy**
