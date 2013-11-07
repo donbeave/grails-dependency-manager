@@ -1,24 +1,33 @@
 includeTargets << grailsScript("_GrailsInit")
 
+addTestDependency = { group, name, version, type = null ->
+  getDeps(group, name, version, type).each { file ->
+    grailsSettings.testDependencies << file
+    return [file]
+  }
+}
+
+addProvidedDependency = { group, name, version, type = null ->
+  getDeps(group, name, version, type).each { file ->
+    grailsSettings.providedDependencies << file
+    return [file]
+  }
+}
+
 addCompileDependency = { group, name, version, type = null ->
+  getDeps(group, name, version, type).each { file ->
+    grailsSettings.compileDependencies << file
+    return [file]
+  }
+}
+
+def getDeps(group, name, version, type) {
   def extraAttrs = type == null ? [:] : ['m:classifier': type]
 
   def ModuleRevisionId = grailsSettings.dependencyManager.getClass().classLoader.loadClass("org.apache.ivy.core.module.id.ModuleRevisionId")
 
   def mrid = ModuleRevisionId.newInstance(group, name, version, extraAttrs)
-  def ret = addModuleToDependencies(mrid, 'compile')
-  ret.each { file ->
-    // add artifacts to the list of Grails provided dependencies
-    // this enables SpringSource STS to build Eclipse's classpath properly
-    if (grailsSettings.metaClass.hasProperty(grailsSettings, "providedDependencies")) {
-      if (!grailsSettings.providedDependencies.contains(file)) {
-        grailsSettings.providedDependencies << file
-      }
-    }
-    grailsSettings.compileDependencies << file
-
-    return [file]
-  }
+  addModuleToDependencies(mrid, 'compile')
 }
 
 def addModuleToDependencies(mrid, type) {
