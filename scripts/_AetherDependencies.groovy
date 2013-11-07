@@ -1,5 +1,3 @@
-import grails.util.BuildSettings
-import org.codehaus.groovy.grails.resolve.Dependency
 
 includeTargets << grailsScript("_GrailsInit")
 
