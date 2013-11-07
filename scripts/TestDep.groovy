@@ -1,8 +1,7 @@
 includeTargets << grailsScript("_GrailsInit")
-includeTargets << new File("${dependencyManagerPluginDir}/scripts/_ExtendedDependencies.groovy")
+includeTargets << new File("${extendedDependencyManagerPluginDir}/scripts/_ExtendedDependencies.groovy")
 
 target(test: "The description of the script goes here!") {
-
 
   addCompileDependency("org.springframework.data",
       "spring-data-gemfire",
@@ -12,3 +11,4 @@ target(test: "The description of the script goes here!") {
 }
 
 setDefaultTarget(test)
+

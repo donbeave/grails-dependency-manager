@@ -21,6 +21,13 @@ addCompileDependency = { group, name, version, type = null ->
   }
 }
 
+addRuntimeDependency = { group, name, version, type = null ->
+  getDeps(group, name, version, type).each { file ->
+    grailsSettings.runtimeDependencies << file
+    return [file]
+  }
+}
+
 def getDeps(group, name, version, type) {
   def extraAttrs = type == null ? [:] : ['m:classifier': type]
 

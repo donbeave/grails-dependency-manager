@@ -17,7 +17,7 @@ For a plugin provided script that builds its own classpath
 ```groovy
 includeTargets << grailsScript("_GrailsInit")
 includeTargets << grailsScript("_GrailsCompile")
-includeTargets << new File("${dependencyManagerPluginDir}/scripts/_ExtendedDependencies.groovy")
+includeTargets << new File("${extendedDependencyManagerPluginDir}/scripts/_ExtendedDependencies.groovy")
 
 target(example: "Some Example Script") {
   depends(compile)
@@ -34,7 +34,7 @@ target(example: "Some Example Script") {
 A plugin script that alters the main classpath during compilation.
 **scripts/_Events.groovy**
 ```groovy
-includeTargets << new File("${dependencyManagerPluginDir}/scripts/_ExtendedDependencies.groovy")
+includeTargets << new File("${extendedDependencyManagerPluginDir}/scripts/_ExtendedDependencies.groovy")
 
 eventCompileStart = {
   addCompileDependency("org.springframework.data",
