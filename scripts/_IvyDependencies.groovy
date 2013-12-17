@@ -36,8 +36,6 @@ def getDeps(group, name, version, type="jar") {
 
   def mrid = ModuleRevisionId.newInstance(group, name, version, [:])
 
-  println "DEPS ${mrid} // ${type}"
-
   addModuleToDependencies(mrid, 'compile')
 }
 
