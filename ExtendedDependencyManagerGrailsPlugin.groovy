@@ -14,9 +14,12 @@
  * limitations under the License.
  */
 
+/**
+ * @author <a href='david.dawson@simplicityitself.com'>David Dawson</a>
+ */
 class ExtendedDependencyManagerGrailsPlugin {
     // the plugin version
-    def version = '0.5.5'
+    def version = '0.5.6'
     def grailsVersion = '2.0 > *'
 
     def title = 'Extended Dependency Manager Plugin'

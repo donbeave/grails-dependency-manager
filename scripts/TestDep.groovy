@@ -14,6 +14,9 @@
  * limitations under the License.
  */
 
+/**
+ * @author <a href='david.dawson@simplicityitself.com'>David Dawson</a>
+ */
 includeTargets << grailsScript('_GrailsInit')
 includeTargets << new File("${extendedDependencyManagerPluginDir}/scripts/_ExtendedDependencies.groovy")
 

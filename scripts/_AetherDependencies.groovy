@@ -14,7 +14,13 @@
  * limitations under the License.
  */
 
+/**
+ * @author <a href='david.dawson@simplicityitself.com'>David Dawson</a>
+ * @author <a href='mailto:donbeave@gmail.com'>Alexey Zhokhov</a>
+ */
 includeTargets << grailsScript('_GrailsInit')
+
+latestReport = null
 
 addTestDependency = { groupId, artifactId, version, type = 'jar' ->
     def files = getDeps(groupId, artifactId, version, type)
@@ -58,12 +64,28 @@ def getDeps(groupId, artifactId, version, type) {
     final dependency = Dependency.newInstance(DefaultArtifact.newInstance(
             groupId, artifactId, type, version), 'compile')
 
+    def result = []
+
+    if (latestReport) {
+        result = latestReport.resolvedArtifacts.findAll {
+            it.dependency.group == groupId && it.dependency.name == artifactId
+        }.collect {
+            it.file
+        }
+    }
+
+    if (result) {
+        return result
+    }
+
     grailsSettings.dependencyManager.addDependency(dependency)
 
-    grailsSettings.dependencyManager.resolve('compile').resolvedArtifacts.findAll {
+    // save result to cache
+    latestReport = grailsSettings.dependencyManager.resolve('compile')
+
+    latestReport.resolvedArtifacts.findAll {
         it.dependency.group == groupId && it.dependency.name == artifactId
     }.collect {
         it.file
     }
 }
-
